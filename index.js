@@ -7,14 +7,17 @@ function render() {
   productsPage.render();
 }
 
-
+spinnerPage.render();
 // https://api.myjson.com/bins/esicc
 fetch('server/catalog.json')
-.then(result => result.json())
-.then(body => {
-  CATALOG = body;
-  render();
-})
-.catch(error => {
-  console.log(error)
-})
+  .then(result => result.json())
+  .then(body => {
+    CATALOG = body;
+    setTimeout(() => {
+      spinnerPage.handleClear();
+      render();
+  }, 1000);
+  })
+  .catch(error => {
+    console.log(error)
+  })
